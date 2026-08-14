@@ -32,28 +32,12 @@ notification-service/
 │   │   └── NotificationConfig.java    ← Singleton
 │   └──
 ```
-
-- If we have to write a constructor for an object that has `to`, `subject`, `body`, `channel`, `priority`, `templateId`, `attachments`, `metadata`, `retryCount`, `scheduleAt`?
-- We will end up with ***telescoping constructor problem***
-```java
-public Notification(String to, String body) { ... }
-public Notification(String to, String body, String subject) { ... }
-public Notification(String to, String body, String subject, String channel) { ... }
-public Notification(String to, String body, String subject, String channel, int priority) { ... }
-// ... 6 more of these
-```
-
-Problems with this:
-1. **Unreadable at call site** — `new Notification("a@b.com", "Hello", null, "EMAIL", 1, null, null, null, 3, null)` — what does that `3` mean?
-2. **Order-sensitive** — swap two `String` arguments, compiler won't catch it, bug in production
-3. **Combinatorial explosion** — 10 fields means potentially dozens of constructors to cover meaningful combinations
-4. **Adding a new optional field** — you touch every constructor
-
 ```bash
 # to create project sturcture
 mkdir -p notification-service/src/main/java/com/lld/notification/{model,notifier,factory,config}
 cd notification-service
 ```
+
 
 
 
