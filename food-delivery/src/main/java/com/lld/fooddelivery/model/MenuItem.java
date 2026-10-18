@@ -7,7 +7,7 @@ public class MenuItem {
     private String itemId;
     private String name;
     private String description;
-    private String price;
+    private double price;
     private String restaurantId;
     private boolean available;
 }
